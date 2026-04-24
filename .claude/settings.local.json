@@ -21,7 +21,11 @@
       "Bash(python test_ocr.py)",
       "Bash(python *)",
       "PowerShell(New-Item *)",
-      "Bash(git branch *)"
+      "Bash(git branch *)",
+      "Bash(git fetch *)",
+      "Bash(git rebase *)",
+      "Bash(git push *)",
+      "Bash(git stash *)"
     ]
   }
 }

@@ -1,6 +1,7 @@
 import time
 import logging
 import ctypes
+import threading
 import pyautogui
 
 import state
@@ -11,15 +12,39 @@ import InputHandler
 
 logger = logging.getLogger(__name__)
 
-# TODO: fill in the x/y offset from the Roblox window top-left
-# to the center of the auto play button.
-AUTO_PLAY_CLICK_X = 0
-AUTO_PLAY_CLICK_Y = 0
+_clicker_event  = threading.Event()
+_clicker_thread = None
+
+
+def _clicker_loop(x, y, interval):
+    while _clicker_event.is_set() and not state.SHUTDOWN:
+        InputHandler.Click(x + state.dx, y + state.dy, delay=0)
+        time.sleep(interval)
+
+
+def start_clicker(x=71, y=579, cps=15):
+    global _clicker_thread
+    stop_clicker()
+    _clicker_event.set()
+    _clicker_thread = threading.Thread(
+        target=_clicker_loop, args=(x, y, 1.0 / cps), daemon=True
+    )
+    _clicker_thread.start()
+    logger.info("Auto clicker started at (%d, %d) @ %d CPS", x, y, cps)
+
+
+def stop_clicker():
+    global _clicker_thread
+    _clicker_event.clear()
+    if _clicker_thread and _clicker_thread.is_alive():
+        _clicker_thread.join(timeout=0.5)
+    _clicker_thread = None
 
 
 def restart_match_ingame():
     """Open settings → Restart Match → Yes → click cancelbutton →
     wait for alert_restart to disappear → close settings."""
+    stop_clicker()
     state._restarting.set()
     try:
         logger.info("Restarting match via settings menu")
@@ -133,7 +158,7 @@ def setup_auto_play() -> bool:
         (358, 296, 0.4),  # position
         (198, 336, 0.3),  # track
         (672, 432, 0.4),  # auto play settings again
-        (323, 386, 0.4),  # slot 1 auto off
+        (323, 386, 0.5),  # slot 1 auto off
         (553, 417, 0.4),  # slot 2 auto upgrade off
         (364, 415, 0.5),  # slot 1 prio
         (333, 359, 0.3),  # min
@@ -163,7 +188,7 @@ def setup_auto_play() -> bool:
         (365, 393, 0.5),  # slot 5 prio
         (333, 359, 0.3),  # min
         (352, 398, 0.3),  # apply
-        (570, 367, 0.3),  # slot 6 auto on
+        (570, 367, 0.5),  # slot 6 auto on
         (558, 396, 0.4),  # slot 6 auto up off
         (612, 393, 0.5),  # slot 6 prio
         (333, 359, 0.3),  # min

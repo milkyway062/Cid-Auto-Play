@@ -56,10 +56,12 @@ def main_loop():
                     break
                 continue
             actions.do_positioning()
-            actions.setup_auto_play()
+            # actions.setup_auto_play()  # disabled — settings persist in-game
             auto_play_activated = True
             logger.info("Auto play set up — restarting match for clean run")
             actions.restart_match_ingame()
+            helpers._sleep(2)
+            actions.start_clicker()
             last_wave0_time = 0.0
             continue
 
@@ -98,6 +100,7 @@ def main_loop():
         # Wait for wave 1 to confirm match is running, then give it 20s before checking wave 0 again
         if detections.wait_for_ingame(timeout=60):
             helpers._sleep(20)
+        actions.start_clicker()
 
         # Auto-rejoin threshold check
         if (state.AUTO_REJOIN_AFTER_RUNS > 0
@@ -109,6 +112,7 @@ def main_loop():
             state.state["runs"]              = 0
             state.state["runs_since_rejoin"] = 0
             last_wave0_time                  = 0.0
+            actions.stop_clicker()
             lobby.auto_rejoin()
             auto_play_activated = False
 
