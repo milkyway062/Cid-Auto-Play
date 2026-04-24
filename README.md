@@ -1,4 +1,4 @@
-# Cid-Auto-Play
+# Cid-Auto-Play - $\color{green}\text{Version:}$ $\color{blue}\text{Beta}$ 
 ## $\color{red}\text{This is based off of}$ $\color{blue}\text{Hirro's}$ $\color{red}\text{Autoplay macro}$ 
  
 ## $\color{purple}\text{Settings}$ - $\color{blue}\text{AV}$
