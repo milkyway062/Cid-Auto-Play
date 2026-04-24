@@ -157,16 +157,16 @@ def setup_auto_play() -> bool:
         (672, 433, 0.4),  # open auto play settings
         (358, 296, 0.4),  # position
         (198, 336, 0.3),  # track
-        (672, 432, 0.4),  # auto play settings again
-        (323, 386, 0.5),  # slot 1 auto off
-        (553, 417, 0.4),  # slot 2 auto upgrade off
-        (364, 415, 0.5),  # slot 1 prio
-        (333, 359, 0.3),  # min
-        (352, 398, 0.3),  # apply
-        (612, 413, 0.5),  # slot 2 prio
-        (333, 359, 0.3),  # min
-        (352, 398, 0.3),  # apply
-        (404, 410, 0.3),  # hover mid for scroll
+       # (672, 432, 0.4),  # auto play settings again
+       # (323, 386, 0.5),  # slot 1 auto off
+       # (553, 417, 0.4),  # slot 2 auto upgrade off
+       # (364, 415, 0.5),  # slot 1 prio
+       # (333, 359, 0.3),  # min
+       # (352, 398, 0.3),  # apply
+       # (612, 413, 0.5),  # slot 2 prio
+       # (333, 359, 0.3),  # min
+       # (352, 398, 0.3),  # apply
+       # (404, 410, 0.3),  # hover mid for scroll
     ]
     for x, y, d in steps:
         if not c(x, y, d):
@@ -177,22 +177,22 @@ def setup_auto_play() -> bool:
         return False
 
     steps2 = [
-        (312, 305, 0.4),  # slot 3 auto up off
-        (286, 276, 0.3),  # slot 3 place off
-        (364, 305, 0.5),  # slot 3 prio
-        (333, 359, 0.3),  # min
-        (352, 398, 0.3),  # apply
-        (532, 277, 0.3),  # slot 4 place off
-        (284, 368, 0.3),  # slot 5 place off
-        (313, 395, 0.4),  # slot 5 auto up off
-        (365, 393, 0.5),  # slot 5 prio
-        (333, 359, 0.3),  # min
-        (352, 398, 0.3),  # apply
-        (570, 367, 0.5),  # slot 6 auto on
-        (558, 396, 0.4),  # slot 6 auto up off
-        (612, 393, 0.5),  # slot 6 prio
-        (333, 359, 0.3),  # min
-        (352, 398, 0.3),  # apply
+       # (312, 305, 0.4),  # slot 3 auto up off
+       # (286, 276, 0.3),  # slot 3 place off
+       # (364, 305, 0.5),  # slot 3 prio
+       # (333, 359, 0.3),  # min
+       # (352, 398, 0.3),  # apply
+       # (532, 277, 0.3),  # slot 4 place off
+       # (284, 368, 0.3),  # slot 5 place off
+       # (313, 395, 0.4),  # slot 5 auto up off
+       # (365, 393, 0.5),  # slot 5 prio
+       # (333, 359, 0.3),  # min
+       # (352, 398, 0.3),  # apply
+       # (570, 367, 0.5),  # slot 6 auto on
+       # (558, 396, 0.4),  # slot 6 auto up off
+       # (612, 393, 0.5),  # slot 6 prio
+       # (333, 359, 0.3),  # min
+       # (352, 398, 0.3),  # apply
         (650, 186, 0.4),  # close ui
         (162, 66, 0.1),   # close chat 1
         (162, 66, 0.1),   # close chat 2

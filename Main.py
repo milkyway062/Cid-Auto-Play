@@ -56,7 +56,7 @@ def main_loop():
                     break
                 continue
             actions.do_positioning()
-            # actions.setup_auto_play()  # disabled — settings persist in-game
+            actions.setup_auto_play()  
             auto_play_activated = True
             logger.info("Auto play set up — restarting match for clean run")
             actions.restart_match_ingame()
