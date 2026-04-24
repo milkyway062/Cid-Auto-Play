@@ -2,7 +2,7 @@
 cd /d "%~dp0"
 
 echo Checking dependencies...
-py -c "import psutil, pyautogui, pygetwindow, requests, keyboard, cv2, PIL" 2>nul
+py -c "import psutil, pyautogui, pygetwindow, requests, keyboard, cv2, PIL, pytesseract, numpy" 2>nul
 if errorlevel 1 (
     echo Some dependencies are missing. Installing now, please wait...
     echo.

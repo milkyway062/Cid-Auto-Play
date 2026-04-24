@@ -5,3 +5,5 @@ keyboard
 opencv-python
 pillow
 psutil
+pytesseract
+numpy

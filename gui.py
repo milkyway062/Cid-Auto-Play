@@ -315,6 +315,15 @@ class MacroGUI:
         self._chk(foot, "Show log", self._show_log,
                   self._toggle_log, bg=BG).pack(side="left")
 
+        self._update_btn = self._btn(
+            foot, "Check for Updates", self._on_update,
+            SURFACE, BORDER, font=FONT_LABEL,
+        )
+        self._update_btn.config(highlightthickness=1,
+                                highlightbackground=BORDER,
+                                highlightcolor=AMBER)
+        self._update_btn.pack(side="right")
+
         # Log panel
         self._log_frame = tk.Frame(self.root, bg=SURFACE)
         self._log_frame.pack(fill="x", padx=12, pady=(0, 8))
@@ -440,6 +449,77 @@ class MacroGUI:
         else:
             self._set_status("Roblox window not found", _DOT_ERR)
             self.root.after(2000, lambda: self._set_status("idle", _DOT_IDLE))
+
+    def _on_update(self):
+        self._update_btn.config(state="disabled", text="Checking...")
+        self._set_status("Checking for updates...", _DOT_IDLE)
+        threading.Thread(target=self._run_update, daemon=True).start()
+
+    def _run_update(self):
+        import hashlib
+        import urllib.request
+
+        REPO      = "milkyway062/Cid-Auto-Play"
+        BASE_API  = f"https://api.github.com/repos/{REPO}"
+        BASE_DIR  = os.path.dirname(os.path.abspath(__file__))
+        SKIP_DIRS = {"__pycache__", ".git", ".claude"}
+
+        def git_blob_sha(path):
+            try:
+                with open(path, "rb") as f:
+                    data = f.read()
+                return hashlib.sha1(f"blob {len(data)}\0".encode() + data).hexdigest()
+            except FileNotFoundError:
+                return None
+
+        def fetch(url):
+            req = urllib.request.Request(url, headers={"User-Agent": "CidAutoPlay-Updater"})
+            with urllib.request.urlopen(req, timeout=10) as r:
+                return r.read()
+
+        def set_status(msg):
+            self.root.after(0, lambda m=msg: self._set_status(m, _DOT_IDLE))
+
+        try:
+            repo_info = json.loads(fetch(BASE_API))
+            branch    = repo_info.get("default_branch", "main")
+
+            set_status("Fetching file list...")
+            tree_data = json.loads(fetch(f"{BASE_API}/git/trees/{branch}?recursive=1"))
+
+            to_update = []
+            for item in tree_data.get("tree", []):
+                if item["type"] != "blob":
+                    continue
+                path  = item["path"]
+                parts = path.replace("\\", "/").split("/")
+                if any(p in SKIP_DIRS for p in parts[:-1]):
+                    continue
+                local_path = os.path.join(BASE_DIR, *parts)
+                if git_blob_sha(local_path) != item["sha"]:
+                    to_update.append((path, parts))
+
+            if not to_update:
+                set_status("Already up to date!")
+                self.root.after(3000, lambda: self._set_status("idle", _DOT_IDLE))
+                return
+
+            for i, (path, parts) in enumerate(to_update):
+                set_status(f"Updating {parts[-1]} ({i + 1}/{len(to_update)})...")
+                data       = fetch(f"https://raw.githubusercontent.com/{REPO}/{branch}/{path}")
+                local_path = os.path.join(BASE_DIR, *parts)
+                os.makedirs(os.path.dirname(local_path) or BASE_DIR, exist_ok=True)
+                with open(local_path, "wb") as f:
+                    f.write(data)
+
+            set_status(f"Updated {len(to_update)} file(s) — restart to apply.")
+
+        except Exception as e:
+            self.root.after(0, lambda: self._set_status(f"Update failed: {e}", _DOT_ERR))
+        finally:
+            self.root.after(0, lambda: self._update_btn.config(
+                state="normal", text="Check for Updates"
+            ))
 
     def _toggle_log(self):
         if self._show_log.get():
