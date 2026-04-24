@@ -5,6 +5,7 @@
 - Have `Auto-Restart` **ON**
 - Have `Auto-Start` **ON**
 - TAKE ALL COSMETICS `OFF`
+- Auto Play saves, scroll down to the auto play settings, do it exactly how it is, then go back to lobby and start it.. fml
 
 ## $\color{purple}\text{Settings}$ - $\color{blue}\text{Roblox}$
 - `0.2` Sensitivity
@@ -19,3 +20,4 @@
 ### _Not much else to go over really, it does everything for you ✌️_
 
 <img width="494" height="373" alt="image" src="https://github.com/user-attachments/assets/155432a1-3a69-4cf5-9c0d-0bf9aaa24683" />
+<img width="963" height="543" alt="image" src="https://github.com/user-attachments/assets/735360f8-5cf3-40a8-91df-4e7f3c73eb34" />
