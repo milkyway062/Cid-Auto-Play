@@ -2,11 +2,25 @@ import logging
 import time
 import os
 import pyautogui
+from pygetwindow import PyGetWindowException
 
 import state
 import InputHandler
 
 logger = logging.getLogger(__name__)
+
+
+def _safe_window_region():
+    """Return (dx, dy, width, height) or None if rb_window is missing or stale."""
+    if not state.rb_window:
+        return None
+    try:
+        return (state.dx, state.dy, state.rb_window.width, state.rb_window.height)
+    except PyGetWindowException:
+        state.rb_window = None
+        return None
+    except Exception:
+        return None
 
 
 def _img(name: str) -> str:
@@ -18,10 +32,7 @@ def _img(name: str) -> str:
 def _wait_for_image(name: str, timeout: float = 5.0, confidence: float = 0.7) -> object:
     """Poll for an image within the Roblox window; return its Box location or None on timeout."""
     deadline = time.time() + timeout
-    region = (
-        (state.dx, state.dy, state.rb_window.width, state.rb_window.height)
-        if state.rb_window else None
-    )
+    region = _safe_window_region()
     while time.time() < deadline:
         if state.SHUTDOWN:
             return None
@@ -42,9 +53,9 @@ def _wait_for_image(name: str, timeout: float = 5.0, confidence: float = 0.7) ->
 
 def is_in_lobby() -> bool:
     """Return True if AreaIcon.png is visible within the Roblox window."""
-    if not state.rb_window:
+    region = _safe_window_region()
+    if not region:
         return False
-    region = (state.dx, state.dy, state.rb_window.width, state.rb_window.height)
     try:
         loc = pyautogui.locateOnScreen(
             _img("AreaIcon.png"), confidence=0.7, grayscale=True, region=region
@@ -70,9 +81,9 @@ def _daily_rewards_visible() -> bool:
 
 def dismiss_passive_menu() -> bool:
     """Detect passive title on screen; if found, click its center."""
-    if not state.rb_window:
+    region = _safe_window_region()
+    if not region:
         return False
-    region = (state.dx, state.dy, state.rb_window.width, state.rb_window.height)
     try:
         location = pyautogui.locateOnScreen(
             image=_img("passive_title.png"),

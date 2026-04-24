@@ -15,3 +15,7 @@ debug_wave_capture.png
 # GUI / IDE
 .vscode/
 .idea/
+
+# Graphify
+graphify-out/
+.graphify_*

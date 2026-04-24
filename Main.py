@@ -121,8 +121,10 @@ def main_loop():
 
 def start() -> bool:
     """Start the macro in a background thread. Returns False if Roblox not found."""
-    if not helpers.initialize():
+    if not helpers.align_roblox():
         return False
+    state._hotkey_registered = True
+    state._initialized       = True
     state.SHUTDOWN                    = False
     state.state["running"]            = True
     state.state["runs"]               = 0
