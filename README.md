@@ -19,4 +19,3 @@
 ### _Not much else to go over really, it does everything for you ✌️_
 
 <img width="494" height="373" alt="image" src="https://github.com/user-attachments/assets/155432a1-3a69-4cf5-9c0d-0bf9aaa24683" />
-<img width="700" height="370" alt="image" src="https://github.com/user-attachments/assets/cea60dcc-0a72-4538-b094-817cf50ce97c" />
