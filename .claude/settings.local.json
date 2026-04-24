@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git ls-tree *)",
+      "Bash(cp \"C:/Users/Bhagy/Desktop/Cid-Macro-But-Better/Images/AreaIcon.png\" \"C:/Users/Bhagy/Desktop/Cid Auto Play/Images/\")",
+      "Bash(cp \"C:/Users/Bhagy/Desktop/Cid-Macro-But-Better/Images/Disconnected.png\" \"C:/Users/Bhagy/Desktop/Cid Auto Play/Images/\")",
+      "Bash(cp \"C:/Users/Bhagy/Desktop/Cid-Macro-But-Better/Images/IsInGame.png\" \"C:/Users/Bhagy/Desktop/Cid Auto Play/Images/\")",
+      "Bash(cp \"C:/Users/Bhagy/Desktop/Cid-Macro-But-Better/Images/ruined_city.png\" \"C:/Users/Bhagy/Desktop/Cid Auto Play/Images/\")",
+      "Bash(cp \"C:/Users/Bhagy/Desktop/Cid-Macro-But-Better/Images/passive_title.png\" \"C:/Users/Bhagy/Desktop/Cid Auto Play/Images/\")",
+      "Bash(cp \"C:/Users/Bhagy/Desktop/Cid-Macro-But-Better/Images/StartButton.png\" \"C:/Users/Bhagy/Desktop/Cid Auto Play/Images/\")",
+      "Bash(py -c \"import ast, sys; files = ['gui.py','Main.py','core/state.py','core/config.py','core/helpers.py','core/detections.py','core/actions.py','core/watchdogs.py','core/lobby.py','core/webhook.py']; [print\\(f\\) or ast.parse\\(open\\(f\\).read\\(\\)\\) for f in files]; print\\('All OK'\\)\")",
+      "Bash(py -c ' *)",
+      "Bash(py -c \"import ast; ast.parse\\(open\\('core/lobby.py', encoding='utf-8'\\).read\\(\\)\\); print\\('OK'\\)\")",
+      "Bash(py -c \"import ast; ast.parse\\(open\\('core/helpers.py', encoding='utf-8'\\).read\\(\\)\\); print\\('OK'\\)\")",
+      "PowerShell(cmd /c \"dir /s /b \"\"C:\\\\Users\\\\Bhagy\\\\Desktop\\\\Cid-Macro-But-Better\\\\Images\\\\\"\"\")",
+      "PowerShell(cmd /c \"dir /b \"\"C:\\\\Users\\\\Bhagy\\\\Desktop\\\\Cid-Macro-But-Better\\\\Images\\\\Positioner\\\\\"\"\")",
+      "PowerShell(cmd /c \"dir /b \"\"C:\\\\Users\\\\Bhagy\\\\Desktop\\\\Cid-Macro-But-Better\\\\Images\\\\Cid_Raid\\\\\"\"\")",
+      "PowerShell(Copy-Item *)",
+      "PowerShell(cmd /c \"dir /s /b \"\"C:\\\\Users\\\\Bhagy\\\\Downloads\\\\Cid_newone\\\\Cid_newone\\\\\"\"\")",
+      "Bash(python -c \"import sys; print\\('sys.path:'\\); [print\\(p\\) for p in sys.path]; import os; print\\('\\\\nos.getcwd\\(\\):', os.getcwd\\(\\)\\)\")",
+      "Bash(python test_ocr.py)",
+      "Bash(python *)",
+      "PowerShell(New-Item *)"
+    ]
+  }
+}

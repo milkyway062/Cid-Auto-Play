@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Debug / temp output
+debug_wave_capture.png
+*.log
+
+# GUI / IDE
+.vscode/
+.idea/
